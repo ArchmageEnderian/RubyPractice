@@ -3,3 +3,6 @@
 ```sh
 $ ruby jetruby.rb
 ```
+
+# licence
+MIT
