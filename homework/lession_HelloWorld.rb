@@ -5,7 +5,6 @@ def greeting
   surname = gets.chomp
   puts "Введите возраст:"
   age = gets.chomp.to_i
-
   if age < 18
     puts "Привет, #{name} #{surname}. Тебе меньше 18 лет, но начать учиться программировать никогда не рано"
   else
