@@ -4,7 +4,7 @@ end
 
 def create_pokemon_array
   pokemon_array = []
-  puts "Сколько покемонов нужно добавить?"
+  puts 'Сколько покемонов нужно добавить?'
   num_pokemons = gets.chomp.to_i
 
   num_pokemons.times do |i|
