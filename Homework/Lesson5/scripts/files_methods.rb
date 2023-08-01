@@ -36,23 +36,43 @@ class FileMaster
   end
 
   def rewrite_file(file_path = @file_path, file_data = @file_data)
-    File.write(file_path, file_data.join("\n"))
+    if file_data.class == "String".class
+      File.write(file_path, file_data)
+    else
+      File.write(file_path, file_data.join("\n"))
+    end
+
   end
 
   def initialize(file_path)
+    if File.exist?(file_path)
+      open_file(file_path)
+    else
+      create_file(file_path, '')
+      open_file(file_path)
+    end
+    @mass_of_findes = []
+  end
+
+  def open_file(file_path)
     file = File.open(file_path)
     @file_path = file_path
     @file_data = file.read.split("\n")
     file.close
-
-    @mass_of_findes = []
   end
 
+  def create_file(path, data = '')
+    rewrite_file(path, data)
+  end
+
+  def empty?
+    @file_data.empty?
+  end
 end
 
-file_master = FileMaster.new('Homework/Lesson5/files/file_to_read.txt')
 
-# file_master.index
+file_master = FileMaster.new('Homework/Lesson5/files/file_to_read.txt')
+# puts file_master.index
 # file_master.find(1)
 # file_master.where('58')
 # file_master.update(2, "Phoenix Wright 26")
