@@ -70,9 +70,9 @@ class FileMaster
   end
 end
 
-file_master1 = FileMaster.new('Homework/Lesson5/files/file_to_file.txt')
 
-# puts file_master1.index
+file_master = FileMaster.new('Homework/Lesson5/files/file_to_read.txt')
+# puts file_master.index
 # file_master.find(1)
 # file_master.where('58')
 # file_master.update(2, "Phoenix Wright 26")
