@@ -52,6 +52,7 @@ class CashMachine
         choice = help(choice)
       end
     end
+    rewrite
     puts 'Конец.'
   end
 
@@ -85,6 +86,10 @@ class CashMachine
     end
     system('clear')
     puts 'Операция успешно завершена!'
+  end
+
+  def rewrite
+    @file.rewrite_file(@file.file_path, @balance.to_s)
   end
 end
 

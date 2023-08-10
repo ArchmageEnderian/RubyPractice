@@ -5,6 +5,8 @@
 class FileMaster
   # Global variables
 
+  attr_reader :file_path
+
   def index
     @file_data
   end
@@ -71,7 +73,7 @@ class FileMaster
 end
 
 
-file_master = FileMaster.new('Homework/Lesson5/files/file_to_read.txt')
+# file_master = FileMaster.new('Homework/Lesson5/files/file_to_read.txt')
 # puts file_master.index
 # file_master.find(1)
 # file_master.where('58')
