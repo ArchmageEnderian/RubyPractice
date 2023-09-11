@@ -3,3 +3,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 //= require jquery
 //= require rails-ujs
+import Rails from "@rails/ujs"
+Rails.start()

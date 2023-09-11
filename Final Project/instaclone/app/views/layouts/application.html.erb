@@ -10,14 +10,25 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <%= javascript_importmap_tags %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
   </head>
 
   <body>
   <div class="container">
     <header>
       <!-- Заголовок и панель навигации -->
+      <%= link_to "Главная страница", root_path %>
+      <% if user_signed_in? %>
+        <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Sign in', new_user_session_path %>
+      <% end %>
       <%= link_to "Поиск пользователей", searchPage_users_path %>
+      <%= link_to 'Мой профиль', profile_path %>
 
     </header>
     <main>

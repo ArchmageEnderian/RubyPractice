@@ -2,12 +2,9 @@ class LikesController < ApplicationController
   before_action :find_post
   before_action :find_like, only: [:destroy]
 
-  belongs_to :user
-  belongs_to :post
-
   def create
     if already_liked?
-      flash[:notice] = "You can't like more than once"
+      flash[:notice] = "Как ни прискорбно, но больше 1 лайка поставить нельзя"
     else
       @post.likes.create(user_id: current_user.id)
     end
@@ -16,7 +13,7 @@ class LikesController < ApplicationController
 
   def destroy
     if !(already_liked?)
-      flash[:notice] = "Cannot unlike"
+      flash[:notice] = "Нельзя разлайкать"
     else
       @like.destroy
     end

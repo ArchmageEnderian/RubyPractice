@@ -18,11 +18,11 @@ class User < ApplicationRecord
   #validates :phone_number, presence: true, uniqueness: false, format: { with: /\A\d{10,15}\z/ }
 
   def follow(other_user)
-    active_relationships.create(followed_id: other_user.id)
+    following << other_user
   end
 
   def unfollow(other_user)
-    active_relationships.find_by(followed_id: other_user.id).destroy
+    following.delete(other_user)
   end
 
   def following?(other_user)

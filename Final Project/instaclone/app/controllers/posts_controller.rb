@@ -7,14 +7,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new # создаем новый пустой объект post для формы
+    @post = current_user.posts.build
   end
 
   def create
     @post = current_user.posts.build(post_params) # создаем новый пост от текущего пользователя
 
     if @post.save
-      redirect_to @post, notice: 'Post was successfully created.'
+      redirect_to @post, notice: 'Пост успешно создан.'
     else
       render :new
     end
@@ -37,9 +37,16 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_path, notice: 'Post was successfully deleted.'
+    if @post.user == current_user
+      @post.destroy
+      flash[:notice] = "Пост успешно удален."
+      redirect_to posts_path
+    else
+      flash[:alert] = "У вас нет прав для выполнения этого действия."
+      redirect_to @post
+    end
   end
+
 
   private
 

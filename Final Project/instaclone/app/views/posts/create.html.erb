@@ -1,2 +1,30 @@
 <h1>Posts#create</h1>
-<p>Find me in app/views/posts/create.html.erb</p>
+<%= form_for @post, html: { multipart: true } do |f| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@post.errors.count, "ошибка") %> запрещено для этого поста:</h2>
+      <ul>
+        <% @post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title, "Заголовок" %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content, "Содержание" %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :image, "Фотография" %><br>
+    <%= f.file_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Создать пост" %>
+  </div>
+<% end %>
+

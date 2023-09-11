@@ -1,2 +1,57 @@
 <h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-4 mb-4">
+      <div class="card post-preview">
+        <%= link_to '#', data: { toggle: 'modal', target: '#imageModal' } do %>
+          <%= image_tag(url_for(@post.image), class: "card-img-top img-thumbnail", alt: "Click to view in full size") if @post.image.attached? %>
+        <% end %>
+        <div class="card-body">
+          <h5 class="card-title"><%= @post.user.username %></h5>
+          <p class="card-text"><%= @post.description %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if @post.user == current_user %>
+    <%= button_to 'Удалить пост', post_path(@post), method: :delete, data: { confirm: 'Вы уверены, что хотите удалить этот пост?' }, class: 'btn btn-danger' %>
+  <% end %>
+
+  <% if current_user && !@post.likes.exists?(user: current_user) %>
+    <%= button_to 'Лайк', post_likes_path(@post), method: :post %>
+  <% else %>
+    <%= button_to "Unlike", post_like_path(post_id: @post.id, id: current_user.likes.find_by(post: @post).id), method: :delete, class: "btn btn-danger" %>
+<% end %>
+
+  <p>Количество лайков: <%= @post.likes.count %></p>
+
+  <h3>Комментарии:</h3>
+  <% @post.comments.each do |comment| %>
+    <p>
+      <strong><%= comment.user.username %>:</strong>
+      <%= comment.content %>
+      <% if comment.user == current_user %>
+        <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </p>
+  <% end %>
+
+  <%= form_with model: [ @post, Comment.new ] do |f| %>
+    <%= f.text_area :content, placeholder: "Оставьте свой комментарий..." %>
+    <%= f.submit "Отправить" %>
+  <% end %>
+
+
+  <!-- Модальное окно -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <%= image_tag(url_for(@post.image), class: "img-fluid", id: "modalImage") if @post.image.attached? %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

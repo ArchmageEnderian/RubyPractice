@@ -14,9 +14,17 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit, :update] do
     member do
       get :followers, :followings
+      post :follow
+      delete :unfollow
     end
     collection do
       get :searchPage
     end
   end
+
+  resources :posts do
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only: [:create, :destroy]
+  end
+
 end

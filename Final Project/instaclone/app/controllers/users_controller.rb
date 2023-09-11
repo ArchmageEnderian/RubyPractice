@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :followings]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :followings, :follow, :unfollow]
   before_action :correct_user, only: [:edit, :update]
 
   def show
@@ -50,6 +50,15 @@ class UsersController < ApplicationController
     end
   end
 
+  def follow
+    current_user.follow(@user)
+    redirect_to @user, notice: 'Вы успешно подписались!'
+  end
+
+  def unfollow
+    current_user.unfollow(@user)
+    redirect_to @user, notice: 'Вы отписались.'
+  end
 
 
 
