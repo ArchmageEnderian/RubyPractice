@@ -1,0 +1,67 @@
+// Основные переменные
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$primary-color: #ffffff; // Белый
+$secondary-color: #262626; // Темно-серый
+$border-color: #dbdbdb; // Светло-серый
+
+body {
+  color: white;
+  font-family: $font-stack;
+  background-color: $secondary-color;
+}
+
+.container {
+  max-width: 935px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid $border-color;
+}
+
+main {
+  // здесь можно добавить специфические стили для основного содержимого
+}
+
+footer {
+  // здесь можно добавить стили для футера
+}
+
+.notice {
+  padding: 15px;
+  background-color: #e6ffed; // светло-зеленый фон
+  border: 1px solid #a1dcb9; // зеленая рамка
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: #03664e; // темно-зеленый текст
+}
+
+.alert {
+  padding: 15px;
+  background-color: #ffe6e6; // светло-красный фон
+  border: 1px solid #dc6c6c; // красная рамка
+  border-radius: 5px;
+  margin-bottom: 20px;
+  color: #8a0000; // темно-красный текст
+}
+button {
+  padding: 8px 15px;
+  background-color: #0095f6;
+  color: $primary-color;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+input[type="text"], input[type="password"], textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 14px;
+  color: $secondary-color;
+}

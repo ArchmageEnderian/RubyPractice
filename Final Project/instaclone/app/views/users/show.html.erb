@@ -1,0 +1,21 @@
+<h1>Users#show</h1>
+<h1>Добро пожаловать, <%= @user.username %>!</h1>
+
+<p><%= @user.bio %></p>
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <%= image_tag post.image.url if post.image? %>
+    <p><%= post.description %></p>
+  <% end %>
+<% else %>
+  <p>У этого пользователя пока нет постов.</p>
+<% end %>
+
+
+<%= link_to "Подписчики (#{@user.followers.count})", followers_user_path(@user) %>
+<%= link_to "Подписки (#{@user.following.count})", followings_user_path(@user) %>
+<% if user_signed_in? && current_user == @user %>
+  <%= link_to 'Редактировать профиль', edit_user_path(@user) %>
+<% end %>
+

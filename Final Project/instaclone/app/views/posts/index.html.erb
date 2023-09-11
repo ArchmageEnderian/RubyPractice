@@ -1,0 +1,28 @@
+<h1>Posts#index</h1>
+
+<% if user_signed_in? %>
+  <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Sign in', new_user_session_path %>
+<% end %>
+
+<%= link_to 'Мой профиль', profile_path %>
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-4 mb-4">
+        <div class="post-preview">
+          <%= link_to image_tag(post.image.url, class: 'img-fluid'), post_path(post) %>
+          <div class="post-info">
+            <strong><%= post.user.username %></strong>
+            <p><%= truncate(post.description, length: 50) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

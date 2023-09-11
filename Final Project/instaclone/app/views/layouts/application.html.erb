@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
     <title>Instaclone</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+  <div class="container">
+    <header>
+      <!-- Заголовок и панель навигации -->
+      <%= link_to "Поиск пользователей", searchPage_users_path %>
+
+    </header>
+    <main>
+      <% if notice.present? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+
+      <% if alert.present? %>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+
+      <%= yield %> <!-- Это место, куда будет вставлено содержимое каждого отдельного представления -->
+    </main>
+    <footer>
+      <!-- Футер, если он есть -->
+    </footer>
+  </div>
   </body>
 </html>
