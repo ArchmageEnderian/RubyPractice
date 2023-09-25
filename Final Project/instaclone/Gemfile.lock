@@ -68,6 +68,8 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    attr_encrypted (4.0.0)
+      encryptor (~> 3.0.0)
     bcrypt (3.1.19)
     bindex (0.8.1)
     bootsnap (1.16.0)
@@ -94,8 +96,11 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    encryptor (3.0.0)
     erubi (1.12.0)
     ffi (1.15.5)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
     globalid (1.2.0)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -240,10 +245,13 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  attr_encrypted
+  bcrypt (~> 3.1.7)
   bootsnap
   capybara
   debug
   devise
+  friendly_id (~> 5.4.0)
   importmap-rails
   jbuilder
   puma (~> 5.0)

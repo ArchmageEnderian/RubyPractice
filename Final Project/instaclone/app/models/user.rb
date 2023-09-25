@@ -1,6 +1,15 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  # has_secure_password
+
+  key_binary = ["ad6eb5ee2e3fdb111705375170e61bc494bc896c5291ad41ea852e8adb627322"].pack('H*')
+
+  attr_encrypted :name, key: key_binary
+  attr_encrypted :email, key: key_binary
+  attr_encrypted :phone_number, key: key_binary
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :posts, dependent: :destroy

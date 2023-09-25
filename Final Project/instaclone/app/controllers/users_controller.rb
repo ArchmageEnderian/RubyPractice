@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
 
   def show
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
   end
 
   def followers
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   def profile
     @user = current_user
-    @posts = @user.posts
+    @posts = @user.posts.order(created_at: :desc)
     render :show
   end
 
@@ -60,16 +60,7 @@ class UsersController < ApplicationController
     redirect_to @user, notice: 'Вы отписались.'
   end
 
-
-
-
-
-
   private
-
-
-
-
 
   def set_user
     @user = User.find(params[:id])
@@ -85,7 +76,5 @@ class UsersController < ApplicationController
       redirect_to user_path, alert: "Вы не можете редактировать профиль другого пользователя."
     end
   end
-
-
 
 end

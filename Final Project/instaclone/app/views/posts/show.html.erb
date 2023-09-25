@@ -15,10 +15,6 @@
     </div>
   </div>
 
-  <% if @post.user == current_user %>
-    <%= button_to 'Удалить пост', post_path(@post), method: :delete, data: { confirm: 'Вы уверены, что хотите удалить этот пост?' }, class: 'btn btn-danger' %>
-  <% end %>
-
   <% if current_user && !@post.likes.exists?(user: current_user) %>
     <%= button_to 'Лайк', post_likes_path(@post), method: :post %>
   <% else %>
@@ -26,6 +22,10 @@
 <% end %>
 
   <p>Количество лайков: <%= @post.likes.count %></p>
+
+  <% if @post.user == current_user %>
+    <%= button_to 'Удалить пост', post_path(@post), method: :delete, data: { confirm: 'Вы уверены, что хотите удалить этот пост?' }, class: 'btn btn-danger' %>
+  <% end %>
 
   <h3>Комментарии:</h3>
   <% @post.comments.each do |comment| %>
@@ -37,6 +37,7 @@
       <% end %>
     </p>
   <% end %>
+
 
   <%= form_with model: [ @post, Comment.new ] do |f| %>
     <%= f.text_area :content, placeholder: "Оставьте свой комментарий..." %>

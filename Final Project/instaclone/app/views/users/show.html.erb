@@ -9,18 +9,7 @@
   <% end %>
 <% end %>
 
-
 <p><%= @user.bio %></p>
-
-<% if @posts.any? %>
-  <% @posts.each do |post| %>
-    <%= image_tag(url_for(post.image)) if post.image.attached? %>
-    <p><%= post.description %></p>
-  <% end %>
-<% else %>
-  <p>У этого пользователя пока нет постов.</p>
-<% end %>
-
 
 <%= link_to "Подписчики (#{@user.followers.count})", followers_user_path(@user) %>
 <%= link_to "Подписки (#{@user.following.count})", followings_user_path(@user) %>
@@ -29,3 +18,17 @@
 <% end %>
 
 <%= link_to "Сделать новый пост", new_post_path %>
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <%= link_to post_path(post) do %>
+      <div class="post-container">
+        <%= image_tag(url_for(post.image)) if post.image.attached? %>
+        <p><%= post.description %></p>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>У этого пользователя пока нет постов.</p>
+<% end %>
+
+
