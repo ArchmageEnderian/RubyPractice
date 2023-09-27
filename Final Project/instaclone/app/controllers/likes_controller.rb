@@ -4,16 +4,18 @@ class LikesController < ApplicationController
 
   def create
     if already_liked?
-      flash[:notice] = "Как ни прискорбно, но больше 1 лайка поставить нельзя"
+      flash[:notice] = 'Как ни прискорбно, но больше 1 лайка поставить нельзя'
     else
       @post.likes.create(user_id: current_user.id)
     end
-    redirect_to post_path(@post)
+
+    redirect_to post_path(@post), notice: 'Осознавая красоту этого красного сердца,
+                  царящего в центре своего пространства... Вы наполняетесь решимостью!'
   end
 
   def destroy
     if !(already_liked?)
-      flash[:notice] = "Нельзя разлайкать"
+      flash[:notice] = 'Нельзя разлайкать'
     else
       @like.destroy
     end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :followers, :followings, :follow, :unfollow]
-  before_action :correct_user, only: [:edit, :update]
+  before_action :set_user, only: %i[show edit update destroy followers followings follow unfollow]
+  before_action :correct_user, only: %i[edit update]
 
   def show
     @posts = @user.posts.order(created_at: :desc)
@@ -10,7 +10,6 @@ class UsersController < ApplicationController
     @followers = @user.followers
   end
 
-
   def followings
     @followings = @user.following
   end
@@ -18,7 +17,6 @@ class UsersController < ApplicationController
   def edit
     @user = current_user
   end
-
 
   def update
     @user = current_user
@@ -35,7 +33,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def profile
     @user = current_user
     @posts = @user.posts.order(created_at: :desc)
@@ -43,11 +40,11 @@ class UsersController < ApplicationController
   end
 
   def searchPage
-    if params[:search].present?
-      @users = User.where("username LIKE ?", "%#{params[:search]}%")
-    else
-      @users = []
-    end
+    @users = if params[:search].present?
+               User.where("username LIKE ?", "%#{params[:search]}%")
+             else
+               []
+             end
   end
 
   def follow

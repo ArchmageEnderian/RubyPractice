@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
 
   # has_secure_password
+  #
+  has_one_attached :avatar
 
   key_binary = ["ad6eb5ee2e3fdb111705375170e61bc494bc896c5291ad41ea852e8adb627322"].pack('H*')
 

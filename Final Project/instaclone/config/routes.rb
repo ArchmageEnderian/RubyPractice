@@ -4,14 +4,17 @@ Rails.application.routes.draw do
   root 'posts#index'
 
   get 'profile', to: 'users#profile', as: 'profile'
+  get 'progress', to: 'progress#show', as: 'progress'
 
-  resources :posts, only: [:index, :new, :create, :edit, :update, :show, :destroy]
-  resources :stories, only: [:index, :new, :create, :show, :destroy]
-  resources :likes, only: [:create, :destroy]
-  resources :comments, only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  # devise_for :users, controllers: { registrations: 'users/registrations' }
 
-  resources :users, only: [:show, :edit, :update] do
+  resources :posts, only: %i[index new create edit update show destroy]
+  resources :stories, only: %i[index new create show destroy]
+  resources :likes, only: %i[create destroy]
+  resources :comments, only: %i[create destroy]
+  resources :relationships, only: %i[create destroy]
+
+  resources :users, only: %i[show edit update] do
     member do
       get :followers, :followings
       post :follow
@@ -23,8 +26,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
-    resources :likes, only: [:create, :destroy]
-    resources :comments, only: [:create, :destroy]
+    resources :likes, only: %i[create destroy]
+    resources :comments, only: %i[create destroy]
   end
 
 end

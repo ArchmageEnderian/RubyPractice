@@ -9,29 +9,39 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <%= javascript_importmap_tags %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
   </head>
 
-  <body>
-  <div class="container">
-    <header>
-      <!-- Заголовок и панель навигации -->
-      <%= link_to "Главная страница", root_path %>
-      <% if user_signed_in? %>
-        <%= button_to 'Sign out', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Sign in', new_user_session_path %>
-      <% end %>
-      <%= link_to "Поиск пользователей", searchPage_users_path %>
-      <%= link_to 'Мой профиль', profile_path %>
 
+
+
+  <body>
+  <div class="content-wrapper">
+    <header class="header">
+      <div class="logo">
+        <%= link_to "Мой Инстаграм", root_path %>
+      </div>
+      <nav class="navigation">
+        <% if user_signed_in? %>
+          <%= button_to 'Выйти', destroy_user_session_path, method: :delete, class: 'nav-button' %>
+          <%= link_to 'Мой профиль', profile_path, class: 'nav-link' %>
+        <% else %>
+          <%= button_to 'Войти', new_user_session_path, class: 'button-custom' %>
+        <% end %>
+        <%= link_to "Поиск пользователей", searchPage_users_path, class: 'nav-link' %>
+      </nav>
     </header>
-    <main>
+
+    <div class="messages">
       <% if notice.present? %>
         <p class="notice"><%= notice %></p>
       <% end %>
@@ -39,12 +49,17 @@
       <% if alert.present? %>
         <p class="alert"><%= alert %></p>
       <% end %>
+    </div>
 
-      <%= yield %> <!-- Это место, куда будет вставлено содержимое каждого отдельного представления -->
+    <main>
+      <%= yield %>
     </main>
-    <footer>
-      <!-- Футер, если он есть -->
-    </footer>
   </div>
+  <footer class="site-footer">
+    <div class="footer-content">
+      "Этот проект является чисто образовательным и не предназначен для коммерческого использования или копирования функционала Instagram. Я уважаю авторские права и создал этот сайт исключительно в целях самообучения и демонстрации навыков программирования."
+    </div>
+  </footer>
   </body>
+
 </html>

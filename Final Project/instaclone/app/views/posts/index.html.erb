@@ -1,16 +1,24 @@
-<h1>Posts#index</h1>
+<h1 class="centered-header1">Посты</h1>
 
 <div class="container mt-5 d-flex flex-column align-items-center">
-  <div class="custom-row d-flex flex-wrap justify-content-center">
+  <div class="posts-wrapper">
     <% if @posts.any? %>
       <% @posts.each do |post| %>
-        <div class="custom-post mb-4">
-          <div class="post-preview">
-            <%= link_to (image_tag(url_for(post.image), class: 'img-fluid') if post.image.attached?), post_path(post) %>
-            <div class="post-info">
-              <strong><%= post.user.username %></strong>
-              <p><%= truncate(post.description, length: 50) %></p>
-            </div>
+        <div class="post-item">
+          <%= link_to post_path(post) do %>
+            <%= image_tag(url_for(post.image), class: 'img-fluid') if post.image.attached? %>
+          <% end %>
+          <div class="post-info">
+            <strong>Автор: <%= post.user.username %></strong>
+            <p><%= truncate(post.description, length: 50) %></p>
+            <p>
+              <% if current_user && post.likes.exists?(user: current_user) %>
+                <i class="fas fa-heart liked-heart"></i>
+              <% else %>
+                <i class="fas fa-heart"></i>
+              <% end %>
+              <%= post.likes.count %>
+            </p>
           </div>
         </div>
       <% end %>
@@ -19,6 +27,3 @@
     <% end %>
   </div>
 </div>
-
-
-

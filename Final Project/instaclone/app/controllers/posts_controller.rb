@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :show, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_post, only: %i[edit update show destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
-    if user_signed_in?
-      @posts = Post.where(user: current_user.following).order(created_at: :desc)
-    else
-      @posts = []
-    end
+    @posts = if user_signed_in?
+               Post.where(user: current_user.following).order(created_at: :desc)
+             else
+               []
+             end
   end
 
   def new
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
 
     if @post.user == current_user
       @post.destroy
-      flash[:success] = "Пост успешно удален."
+      flash[:success] = 'Пост успешно удален.'
 
       # Проверяем, является ли предыдущая страница страницей удаленного поста
       if back_url == post_url(@post)
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
         redirect_to back_url
       end
     else
-      flash[:alert] = "Вы не можете удалить этот пост."
+      flash[:alert] = 'Вы не можете удалить этот пост.'
       redirect_to posts_path
     end
   end

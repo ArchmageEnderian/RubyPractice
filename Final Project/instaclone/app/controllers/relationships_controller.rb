@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
       flash[:success] = "Вы подписались на #{@followed.username}!"
       redirect_to @followed
     else
-      flash[:danger] = "Ошибка при подписке."
+      flash[:danger] = 'Ошибка при подписке.'
       redirect_to root_path
     end
   end
@@ -20,7 +20,7 @@ class RelationshipsController < ApplicationController
       flash[:success] = "Вы отписались от #{@followed.username}!"
       redirect_to @followed
     else
-      flash[:danger] = "Ошибка при отписке."
+      flash[:danger] = 'Ошибка при отписке.'
       redirect_to root_path
     end
   end

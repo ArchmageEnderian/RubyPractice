@@ -1,6 +1,6 @@
 class StoriesController < ApplicationController
-  before_action :set_story, only: [:show, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_story, only: %i[show destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   def index
     @stories = Story.where(user: current_user.following).order(created_at: :desc)
