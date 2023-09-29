@@ -1,6 +1,11 @@
 class ProgressController < ApplicationController
   def show
-    @content = File.read(Rails.root.join('OtherThings/TODO.txt'))
+    file_path = Rails.root.join('OtherThings/TODO.txt')
+    if File.exist?(file_path)
+      @content = File.read(file_path)
+    else
+      @content = "File not found"
+    end
   end
 
 end

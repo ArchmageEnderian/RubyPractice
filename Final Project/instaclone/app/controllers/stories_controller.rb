@@ -3,8 +3,13 @@ class StoriesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
 
   def index
-    @stories = Story.where(user: current_user.following).order(created_at: :desc)
+    @stories = if user_signed_in?
+                 Story.where(user: current_user.following).order(created_at: :desc)
+               else
+                 []
+               end
   end
+
 
   def new
     @story = current_user.stories.build

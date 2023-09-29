@@ -29,8 +29,13 @@ class LikesController < ApplicationController
   end
 
   def find_like
-    @like = @post.likes.find(params[:id])
+    @like = @post.likes.find_by(id: params[:id])
+    unless @like
+      flash[:alert] = 'Лайк не найден'
+      redirect_to post_path(@post) and return
+    end
   end
+
 
   def already_liked?
     Like.where(user_id: current_user.id, post_id: params[:post_id]).exists?
