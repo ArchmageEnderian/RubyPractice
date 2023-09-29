@@ -1,0 +1,13 @@
+<h1>Подписчики <%= @user.username %></h1>
+
+<% if @followers.any? %>
+  <ul>
+    <% @followers.each do |follower| %>
+      <li><%= link_to follower.username, user_path(follower) %></li>
+    <% end %>
+  </ul>
+
+<% else %>
+  <p>У пользователя <%= @user.username %> пока нет подписавшихся.</p>
+<% end %>
+

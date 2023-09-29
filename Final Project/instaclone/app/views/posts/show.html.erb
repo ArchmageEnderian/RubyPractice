@@ -1,0 +1,75 @@
+
+
+<div class="container mt-5">
+
+  <div class="post-main-section text-center">
+
+    <% if user_signed_in? && current_user == @post.user %>
+      <h1 class="centered-header">Просмотр вашего поста</h1>
+    <% else %>
+      <h1 class="centered-header">Пост пользователя <%= @post.user.username %></h1>
+    <% end %>
+
+    <!-- Отображение поста -->
+    <div class="post-display mt-4 d-inline-block">
+      <%= link_to '#', data: { toggle: 'modal', target: '#imageModal' } do %>
+        <%= image_tag(url_for(@post.image), class: "img-fluid post-image", alt: "Click to view in full size") if @post.image.attached? %>
+      <% end %>
+      <div class="post-description bg-light p-3 mt-3 rounded">
+        <p><%= @post.description %></p>
+      </div>
+    </div>
+
+    <div class="like-section mt-3 d-flex align-items-center justify-content-center">
+      <% if current_user && !@post.likes.exists?(user: current_user) %>
+        <%= button_to post_likes_path(@post), method: :post, class: "like-button" do %>
+          <i class="fas fa-heart"></i>
+        <% end %>
+      <% else %>
+        <%= button_to post_like_path(post_id: @post.id, id: current_user.likes.find_by(post: @post).id), method: :delete, class: "like-button liked" do %>
+          <i class="fas fa-heart"></i>
+        <% end %>
+      <% end %>
+      <span><%= @post.likes.count %></span>
+    </div>
+
+    <% if @post.user == current_user %>
+      <%= button_to 'Удалить пост', post_path(@post), method: :delete, data: { confirm: 'Вы уверены, что хотите удалить этот пост?' }, class: 'btn btn-danger mt-3 d-block mx-auto' %>
+    <% end %>
+
+    <div class="comments-section mt-5">
+      <h3>Комментарии:</h3>
+      <% @post.comments.each do |comment| %>
+        <div class="comment-item mt-3 text-left p-3 bg-light rounded">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex align-items-center">
+              <%= image_tag(comment.user.avatar, width: 40, height: 40, class: 'rounded-circle mr-2') if comment.user.avatar.attached? %>
+              <strong><%= comment.user.username %></strong>
+            </div>
+            <% if comment.user == current_user %>
+              <%= button_to "Удалить комментарий", post_comment_path(@post, comment), method: :delete, data: { confirm: "Вы уверены, что хотите удалить этот комментарий?" }, class: "btn btn-danger btn-sm" %>
+            <% end %>
+          </div>
+          <p class="mt-2 comment-content bg-white p-2 rounded"><%= comment.content %></p>
+        </div>
+      <% end %>
+
+
+      <%= form_with model: [ @post, Comment.new ], class: 'comment-form mt-3' do |f| %>
+        <%= f.text_area :content, placeholder: "Оставьте свой комментарий...", class: "form-control mb-3" %>
+        <%= f.submit "Отправить", class: "btn btn-primary d-block mx-auto" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-body">
+          <%= image_tag(url_for(@post.image), class: "img-fluid", id: "modalImage") if @post.image.attached? %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

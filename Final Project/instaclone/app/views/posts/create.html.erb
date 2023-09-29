@@ -1,0 +1,34 @@
+<div class="container mt-5">
+  <h1 class="centered-header">Создать новый пост</h1>
+
+  <div class="post-form-wrapper mt-5">
+
+    <%= form_for @post, html: { multipart: true, class: 'post-form' } do |f| %>
+
+      <% if @post.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2><%= pluralize(@post.errors.count, "ошибка") %> запрещено для этого поста:</h2>
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :content, "Содержание" %>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :image, "Фотография" %>
+        <%= f.file_field :image, class: 'form-control-file' %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Создать пост", class: 'btn btn-primary' %>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>

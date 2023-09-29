@@ -1,0 +1,58 @@
+<div class="container mt-5">
+
+  <% if user_signed_in? && current_user == @user %>
+    <h1 class="centered-header1">С возвращением, <%= @user.username %>!</h1>
+  <% else %>
+    <h1 class="centered-header1">Приветствуем на странице пользователя <%= @user.username %>!</h1>
+  <% end %>
+
+  <div class="d-flex flex-row align-items-start justify-content-center mt-5">
+
+    <div class="posts-wrapper">
+      <% if @posts.any? %>
+        <% @posts.each do |post| %>
+          <%= link_to post_path(post) do %>
+            <div class="post-item">
+              <%= image_tag(url_for(post.image), class: 'img-fluid') if post.image.attached? %>
+              <div class="post-info">
+                <p><%= post.description %></p>
+              </div>
+
+              <% if user_signed_in? && current_user == post.user %>
+                <%= link_to 'Редактировать пост', edit_post_path(post), class: 'edit-post-link' %>
+              <% end %>
+
+            </div>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p class="no-posts">У этого пользователя пока нет постов.</p>
+      <% end %>
+    </div>
+
+    <div class="user-sidebar">
+      <div class="avatar">
+
+        <%= image_tag(url_for(@user.avatar), class: 'img-fluid') if @user.avatar.attached? %>
+      </div>
+      <h2><%= @user.username %></h2>
+      <p><%= @user.bio %></p>
+
+      <div class="user-actions">
+        <%= link_to "Подписчики (#{@user.followers.count})", followers_user_path(@user) %>
+        <%= link_to "Подписки (#{@user.following.count})", followings_user_path(@user) %>
+
+        <% unless current_user == @user %>
+          <% if current_user.following?(@user) %>
+            <%= button_to 'Отписаться', unfollow_user_path(@user), method: :delete, class: "nav-button" %>
+          <% else %>
+            <%= button_to 'Подписаться', follow_user_path(@user) %>
+          <% end %>
+        <% else %>
+          <%= link_to 'Редактировать профиль', edit_user_path(@user) %>
+          <%= link_to "Сделать новый пост", new_post_path %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

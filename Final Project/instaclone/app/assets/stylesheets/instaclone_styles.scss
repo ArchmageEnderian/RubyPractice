@@ -1,0 +1,390 @@
+// Основные переменные
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+$primary-color: #ffffff;
+$secondary-color: #262626;
+$border-color: #dbdbdb;
+
+.d-flex.flex-row.align-items-start.justify-content-center {
+  justify-content: space-between;
+}
+.container {
+  max-width: 935px;
+  margin: 0 auto;
+}
+.container-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.header {
+  background-color: #F5E7DE;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #e7e7e7;
+}
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  padding: 5px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f7f7f7;
+  }
+}
+
+.nav-button {
+  padding: 5px 15px;
+  border: none;
+  background-color: #ff4b5a;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #e43f50;
+  }
+}
+.messages {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.notice {
+  padding: 10px 15px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 5px;
+}
+
+.alert {
+  padding: 10px 15px;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 5px;
+}
+
+.site-footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  background-color: #f7f7f7;
+  border-top: 1px solid #e7e7e7;
+  color: #777;
+  font-size: 14px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  background-color: #F5E7DE;
+  font-family: 'Poppins', sans-serif;
+}
+
+.content-wrapper {
+  background-color: #F5E7DE;
+  min-height: calc(100% - 60px);
+  padding-bottom: 60px;
+}
+
+.site-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 60px;  /* Высота вашего футера */
+  background-color: #f7f7f7;
+  border-top: 1px solid #e7e7e7;
+  color: #777;
+  font-size: 14px;
+  text-align: center;
+}
+
+.posts-wrapper {
+  flex: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 65%;
+  flex-grow: 1;
+  max-width: 65%;
+
+  .post-item {
+    flex-basis: 100%;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .img-fluid {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .post-info {
+      padding: 10px;
+      background-color: #F5E7DE;
+
+      strong {
+        display: block;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    .post-item {
+      flex-basis: 48%;
+    }
+  }
+}
+
+.centered-header1 {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.no-posts {
+  text-align: center;
+  width: 100%;
+}
+
+.centered-header {
+  text-align: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.user-bio {
+  margin: 20px 0;
+  text-align: center;
+  max-width: 80%;
+}
+
+.user-actions {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+
+  a {
+    margin: 5px;
+  }
+}
+
+.user-sidebar {
+  flex: 1;
+  padding-left: 20px;
+  max-width: 300px;
+  width: 300px;
+
+  .avatar {
+    width: 100%;
+    margin-bottom: 20px;
+
+    .img-fluid {
+      max-width: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #777;
+  }
+
+  .user-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;  // для вертикального расстояния между элементами
+
+    a, button {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.post-form-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.post-form {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+}
+
+.like-section span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.comments-section {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.like-button {
+  text-decoration: none;
+  color: #888;
+}
+
+.like-button:hover, .like-button.liked {
+  color: red;
+}
+
+.post-description {
+  border: 1px solid #e5e5e5;
+}
+
+.comment-item {
+  margin-bottom: 20px; /* расстояние между комментариями */
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.comment-content {
+  margin-top: 10px;
+}
+
+.liked-heart {
+  color: red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-bottom: 1px solid $border-color;
+}
+
+.button-custom {
+  padding: 8px 15px;
+  background-color: #0095f6;
+  color: $primary-color;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+}
+input[type="text"], input[type="password"], textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  font-size: 14px;
+  color: $secondary-color;
+}
+.post-preview {
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+}
+.post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+  transition: background-color 0.3s;
+
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
+.custom-row {
+  width: 100%;
+  max-width: 1200px; /* или любая другая максимальная ширина, которую вы предпочитаете */
+  overflow-y: auto;
+}
+
+.custom-post {
+  margin: 0 15px; /* горизонтальные отступы между постами */
+  width: calc(33.33% - 30px); /* вычитаем двойной отступ */
+}
+

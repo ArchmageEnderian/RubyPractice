@@ -1,0 +1,13 @@
+<h1>Подписки <%= @user.username %></h1>
+
+<% if @followings.any? %>
+    <ul>
+    <% @followings.each do |user| %>
+        <li>
+        <%= link_to user.username, user_path(user) %>
+        </li>
+  <% end %>
+</ul>
+<% else %>
+  <p>Пользователь <%= @user.username %> пока ни на кого не подписан.</p>
+<% end %>

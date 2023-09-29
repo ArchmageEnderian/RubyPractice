@@ -1,0 +1,29 @@
+<h1 class="centered-header1">Посты</h1>
+
+<div class="container mt-5 d-flex flex-column align-items-center">
+  <div class="posts-wrapper">
+    <% if @posts.any? %>
+      <% @posts.each do |post| %>
+        <div class="post-item">
+          <%= link_to post_path(post) do %>
+            <%= image_tag(url_for(post.image), class: 'img-fluid') if post.image.attached? %>
+          <% end %>
+          <div class="post-info">
+            <strong>Автор: <%= post.user.username %></strong>
+            <p><%= truncate(post.description, length: 50) %></p>
+            <p>
+              <% if current_user && post.likes.exists?(user: current_user) %>
+                <i class="fas fa-heart liked-heart"></i>
+              <% else %>
+                <i class="fas fa-heart"></i>
+              <% end %>
+              <%= post.likes.count %>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h3>Подпишитесь на пользователей, чтобы видеть их посты.</h3>
+    <% end %>
+  </div>
+</div>

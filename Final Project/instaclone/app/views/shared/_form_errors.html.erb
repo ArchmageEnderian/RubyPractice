@@ -1,0 +1,22 @@
+<!-- Общий код для вывода ошибок -->
+<% if object.errors.any? %>
+  <div id="error_explanation">
+    <h2>
+      <% case object.errors.count %>
+      <% when 1 %>
+        Ошибка:
+      <% when 2..4 %>
+        <%= object.errors.count %> ошибки:
+      <% else %>
+        <%= object.errors.count %> ошибок:
+      <% end %>
+      Не удалось сохранить профиль из-за следующих причин:
+    </h2>
+    <ul>
+      <% object.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
